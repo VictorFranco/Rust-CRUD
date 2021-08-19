@@ -22,11 +22,7 @@ pub fn get_field(field:&str)-> String{
     data.trim().to_string()
 }
 
-pub fn create_client(clients:&mut HashMap<String,Client>){
-    std::process::Command::new("clear").status().unwrap();// clear screen
-    println!("-------------------------------\n\
-              |     Creacion del Cliente    |\n\
-              -------------------------------\n");
+fn create_client()-> Client{
     let alias       = get_field("Alias");
     let name        = get_field("Nombre");
     let f_lastname  = get_field("Primer Apellido");
@@ -36,8 +32,16 @@ pub fn create_client(clients:&mut HashMap<String,Client>){
     let phone       = get_field("Telefono").trim().parse::<i32>().unwrap();
     let email       = get_field("Correo");
 
-    // create client
-    let client = Client{ alias, name, f_lastname, s_lastname, business, rfc, phone, email };
+    // return client
+    Client{ alias, name, f_lastname, s_lastname, business, rfc, phone, email }
+}
+
+pub fn insert_client(clients:&mut HashMap<String,Client>){
+    std::process::Command::new("clear").status().unwrap();// clear screen
+    println!("-------------------------------\n\
+              |     Creacion del Cliente    |\n\
+              -------------------------------\n");
+    let client = create_client();
 }
 
 pub fn update_client(clients:&mut HashMap<String,Client>){

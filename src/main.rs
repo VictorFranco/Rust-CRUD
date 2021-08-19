@@ -23,7 +23,7 @@ fn main() {
     println!("");
     let option = option.trim().parse::<i32>().unwrap();// cast option
     match option {
-        1 => crud::create_client(&mut clients),
+        1 => crud::insert_client(&mut clients),
         2 => crud::update_client(&mut clients),
         3 => crud::delete_client(&mut clients),
         4 => crud::show_clients(&mut clients),
