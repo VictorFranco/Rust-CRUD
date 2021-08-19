@@ -17,7 +17,7 @@ pub fn get_field(field:&str)-> String{
     print!(">>> ");
     let _ = io::stdout().flush();
     let mut data = String::new();
-    io::stdin().read_line(&mut data).unwrap();//        get user input
+    io::stdin().read_line(&mut data).unwrap();// get user input
     println!("");
     data.trim().to_string()
 }
@@ -42,6 +42,8 @@ pub fn insert_client(clients:&mut HashMap<String,Client>){
               |     Creacion del Cliente    |\n\
               -------------------------------\n");
     let client = create_client();
+    let alias  = client.alias[..].to_string(); //create an alias copy
+    clients.insert(alias, client);//             insert in HashMap
 }
 
 pub fn update_client(clients:&mut HashMap<String,Client>){
