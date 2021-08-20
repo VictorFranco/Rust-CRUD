@@ -12,6 +12,10 @@ pub struct Client {
     email:      String
 }
 
+fn clear(){
+    std::process::Command::new("clear").status().unwrap();// clear screen
+}
+
 fn pause(){
     print!("Presiona enter para continuar ...  ");
     let _ = io::stdout().flush();
@@ -44,7 +48,7 @@ fn create_client()-> Client{
 }
 
 pub fn insert_client(clients:&mut HashMap<String,Client>){
-    std::process::Command::new("clear").status().unwrap();// clear screen
+    clear();
     println!("-------------------------------\n\
               |     Creacion del Cliente    |\n\
               -------------------------------\n");
@@ -58,17 +62,17 @@ pub fn update_client(clients:&mut HashMap<String,Client>){
 }
 
 pub fn delete_client(clients:&mut HashMap<String,Client>){
-    std::process::Command::new("clear").status().unwrap();// clear screen
+    clear();
     let alias = get_field("Alias");
     clients.remove(&alias);
 }
 
 pub fn show_clients(clients:&mut HashMap<String,Client>){
-    std::process::Command::new("clear").status().unwrap();// clear screen
+    clear();
     println!("-------------------------------\n\
               |     Clientes Registrados    |\n\
               -------------------------------\n\
-              |      alias -> nombre        |\n\
+              |        key -> nombre        |\n\
               -------------------------------");
     for (key, value) in clients.into_iter() {
         println!("  {:>10} -> {} {}", key, value.name, value.f_lastname);
