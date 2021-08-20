@@ -33,8 +33,11 @@ fn get_field(field:&str)-> String{
     data.trim().to_string()
 }
 
-fn create_client()-> Client{
-    let alias       = get_field("Alias");
+fn create_client(alias:Option<String>)-> Client{
+    let alias = match alias {
+        Some(t) => t,//      if alias exists : use that value
+        None    => get_field("Alias")// else : request the value
+    };
     let name        = get_field("Nombre");
     let f_lastname  = get_field("Primer Apellido");
     let s_lastname  = get_field("Segundo Apellido");
@@ -52,13 +55,26 @@ pub fn insert_client(clients:&mut HashMap<String,Client>){
     println!("-------------------------------\n\
               |     Creacion del Cliente    |\n\
               -------------------------------\n");
-    let client = create_client();
+    let client = create_client(None);
     let alias  = client.alias[..].to_string(); //create an alias copy
     clients.insert(alias, client);//             insert in HashMap
     pause();
 }
 
 pub fn update_client(clients:&mut HashMap<String,Client>){
+    clear();
+    println!("-------------------------------\n\
+              |     Modificar el Cliente    |\n\
+              -------------------------------\n");
+    let alias = get_field("Alias");
+    match clients.get(&alias) {
+        Some(_) => {},
+        None    => panic!("Alias no encontrado"),
+    }
+    let client = create_client(Some(alias));
+    let alias  = client.alias[..].to_string(); //create an alias copy
+    clients.insert(alias, client);//             insert in HashMap
+    pause();
 }
 
 pub fn delete_client(clients:&mut HashMap<String,Client>){
@@ -72,7 +88,7 @@ pub fn show_clients(clients:&mut HashMap<String,Client>){
     println!("-------------------------------\n\
               |     Clientes Registrados    |\n\
               -------------------------------\n\
-              |        key -> nombre        |\n\
+              |      alias -> nombre        |\n\
               -------------------------------");
     for (key, value) in clients.into_iter() {
         println!("  {:>10} -> {} {}", key, value.name, value.f_lastname);
