@@ -26,12 +26,8 @@ fn main() {
                   |    4. Lista Clientes        |\n\
                   |    5. Salir                 |\n\
                   |                             |\n\
-                  -------------------------------\n");
-        print!(">>> ");
-        let _ = io::stdout().flush();
-        let mut option = String::new();
-        io::stdin().read_line(&mut option).unwrap();//        get user input
-        println!("");
+                  -------------------------------");
+        let option = crud::get_field("");
         let option = option.trim().parse::<i32>().unwrap();// cast option
         match option {
             1 => crud::insert_client(&mut clients),
@@ -39,7 +35,10 @@ fn main() {
             3 => crud::delete_client(&mut clients),
             4 => crud::show_clients(&mut clients),
             5 => break,
-            _ => println!("Esa no es una opcion valida")
+            _ => {
+                    println!("Esa no es una opcion valida");
+                    crud::pause();
+                 }
         }
     }
 }

@@ -16,7 +16,7 @@ pub fn clear(){
     std::process::Command::new("clear").status().unwrap();// clear screen
 }
 
-fn pause(){
+pub fn pause(){
     print!("Presiona enter para continuar ...  ");
     let _ = io::stdout().flush();
     let mut data = String::new();
