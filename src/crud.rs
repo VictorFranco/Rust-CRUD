@@ -12,7 +12,7 @@ pub struct Client {
     email:      String
 }
 
-pub fn get_field(field:&str)-> String{
+fn get_field(field:&str)-> String{
     println!("{}",field);
     print!(">>> ");
     let _ = io::stdout().flush();
@@ -53,4 +53,11 @@ pub fn delete_client(clients:&mut HashMap<String,Client>){
 }
 
 pub fn show_clients(clients:&mut HashMap<String,Client>){
+    std::process::Command::new("clear").status().unwrap();// clear screen
+    println!("-------------------------------\n\
+              |     Clientes Registrados    |\n\
+              -------------------------------\n");
+    for (_, value) in clients.into_iter() {
+        println!("Nombre: {} {}\n", value.name, value.f_lastname);
+    }
 }
