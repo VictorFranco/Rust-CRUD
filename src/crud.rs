@@ -83,6 +83,9 @@ pub fn update_client(clients:&mut HashMap<String,Client>){
 
 pub fn delete_client(clients:&mut HashMap<String,Client>){
     clear();
+    println!("-------------------------------\n\
+              |     Eliminar el Cliente     |\n\
+              -------------------------------\n");
     let alias = get_field("Alias");
     clients.remove(&alias);
 }
