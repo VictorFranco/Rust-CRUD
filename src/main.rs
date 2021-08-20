@@ -1,12 +1,21 @@
 use std::collections::HashMap;
 use std::io::{self, Write};
+use std::process;
 mod crud;
 
 fn main() {
+    crud::clear();
+
+    let security = crud::get_field("Palabra de seguridad");
+    if security!=String::from("password") {
+        println!("Palabra incorrecta");
+        process::exit(1);
+    }
+
     let mut clients:HashMap<String,crud::Client> = HashMap::new();
 
     loop {
-        std::process::Command::new("clear").status().unwrap();// clear screen
+        crud::clear();
         println!("-------------------------------\n\
                   |            Menu             |\n\
                   -------------------------------\n\

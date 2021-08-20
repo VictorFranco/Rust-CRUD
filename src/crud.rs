@@ -12,7 +12,7 @@ pub struct Client {
     email:      String
 }
 
-fn clear(){
+pub fn clear(){
     std::process::Command::new("clear").status().unwrap();// clear screen
 }
 
@@ -23,7 +23,7 @@ fn pause(){
     io::stdin().read_line(&mut data).unwrap();// get user input
 }
 
-fn get_field(field:&str)-> String{
+pub fn get_field(field:&str)-> String{
     println!("{}",field);
     print!(">>> ");
     let _ = io::stdout().flush();
