@@ -5,7 +5,7 @@ pub struct Client {
     alias:      String,
     name:       String,
     f_lastname: String,
-    s_lastname: String,
+    s_lastname: Option<String>,
     business:   String,
     rfc:        String,
     phone:      i32,
@@ -40,10 +40,14 @@ fn create_client(alias:Option<String>)-> Client{
     };
     let name        = get_field("Nombre");
     let f_lastname  = get_field("Primer Apellido");
-    let s_lastname  = get_field("Segundo Apellido");
+    let s_lastname  = get_field("Segundo Apellido (Opcional): Si no tienes presiona enter");
+    let s_lastname  = match &s_lastname[..] {
+        "" => None,//   if user doesn't have it : None
+        t  => Some(t.to_string())//        else : Some(value)
+    };
     let business    = get_field("Razon Social");
     let rfc         = get_field("RFC");
-    let phone       = get_field("Telefono").trim().parse::<i32>().unwrap();
+    let phone       = get_field("Telefono (Solo numeros)").trim().parse::<i32>().unwrap();
     let email       = get_field("Correo");
 
     // return client
