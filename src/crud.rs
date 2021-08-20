@@ -12,6 +12,13 @@ pub struct Client {
     email:      String
 }
 
+fn pause(){
+    print!("Presiona enter para continuar ...  ");
+    let _ = io::stdout().flush();
+    let mut data = String::new();
+    io::stdin().read_line(&mut data).unwrap();// get user input
+}
+
 fn get_field(field:&str)-> String{
     println!("{}",field);
     print!(">>> ");
@@ -44,6 +51,7 @@ pub fn insert_client(clients:&mut HashMap<String,Client>){
     let client = create_client();
     let alias  = client.alias[..].to_string(); //create an alias copy
     clients.insert(alias, client);//             insert in HashMap
+    pause();
 }
 
 pub fn update_client(clients:&mut HashMap<String,Client>){
@@ -60,4 +68,5 @@ pub fn show_clients(clients:&mut HashMap<String,Client>){
     for (_, value) in clients.into_iter() {
         println!("Nombre: {} {}\n", value.name, value.f_lastname);
     }
+    pause();
 }
