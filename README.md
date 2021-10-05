@@ -15,6 +15,6 @@ Al ejecutar el programa va a pedir una palabra de seguridad y est&aacute; es
 password.
 ![cap1](https://imgur.com/PRUya83.png "Palabra de seguridad")
 
-Este es el men&uacute; e intruduciendo el respectivo n&uacute;mero se
+Este es el men&uacute; e introduciendo el respectivo n&uacute;mero se
 ejecutar&aacute; la acci&oacute;n.
 ![cap2](https://imgur.com/shQoqnW.png "Men&uacute;")
