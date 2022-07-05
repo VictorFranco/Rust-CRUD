@@ -7,8 +7,8 @@ pub struct Client {
     f_lastname: String,
     s_lastname: Option<String>,
     business:   String,
-    rfc:        String,
-    phone:      i32,
+    itin:       String,
+    phone:      i64,
     email:      String
 }
 
@@ -17,7 +17,7 @@ pub fn clear(){
 }
 
 pub fn pause(){
-    print!("Presiona enter para continuar ...  ");
+    print!("Press ENTER to continue ...  ");
     let _ = io::stdout().flush();
     let mut data = String::new();
     io::stdin().read_line(&mut data).unwrap();// get user input
@@ -38,26 +38,26 @@ fn create_client(alias:Option<String>)-> Client{
         Some(t) => t,//      if alias exists : use that value
         None    => get_field("Alias")// else : request the value
     };
-    let name        = get_field("Nombre");
-    let f_lastname  = get_field("Primer Apellido");
-    let s_lastname  = get_field("Segundo Apellido (Opcional): Si no tienes presiona enter");
+    let name        = get_field("Name");
+    let f_lastname  = get_field("First Last Name");
+    let s_lastname  = get_field("Second Last Name (Optional): if you don't have press ENTER");
     let s_lastname  = match &s_lastname[..] {
         "" => None,//   if user doesn't have it : None
         t  => Some(t.to_string())//        else : Some(value)
     };
-    let business    = get_field("Razon Social");
-    let rfc         = get_field("RFC");
-    let phone       = get_field("Telefono (Solo numeros)").trim().parse::<i32>().unwrap();
-    let email       = get_field("Correo");
+    let business    = get_field("Business");
+    let itin        = get_field("ITIN");
+    let phone       = get_field("Phone (only numbers)").trim().parse::<i64>().unwrap();
+    let email       = get_field("Email");
 
     // return client
-    Client{ alias, name, f_lastname, s_lastname, business, rfc, phone, email }
+    Client{ alias, name, f_lastname, s_lastname, business, itin, phone, email }
 }
 
 pub fn insert_client(clients:&mut HashMap<String,Client>){
     clear();
     println!("-------------------------------\n\
-              |     Creacion del Cliente    |\n\
+              |        Create Client        |\n\
               -------------------------------\n");
     let client = create_client(None);
     let alias  = client.alias[..].to_string(); //create an alias copy
@@ -68,12 +68,12 @@ pub fn insert_client(clients:&mut HashMap<String,Client>){
 pub fn update_client(clients:&mut HashMap<String,Client>){
     clear();
     println!("-------------------------------\n\
-              |     Modificar el Cliente    |\n\
+              |        Update Client        |\n\
               -------------------------------\n");
     let alias = get_field("Alias");
     match clients.get(&alias) {
         Some(_) => {},
-        None    => panic!("Alias no encontrado"),
+        None    => panic!("Alias not found"),
     }
     let client = create_client(Some(alias));
     let alias  = client.alias[..].to_string(); //create an alias copy
@@ -84,21 +84,33 @@ pub fn update_client(clients:&mut HashMap<String,Client>){
 pub fn delete_client(clients:&mut HashMap<String,Client>){
     clear();
     println!("-------------------------------\n\
-              |     Eliminar el Cliente     |\n\
+              |        Delete Client        |\n\
               -------------------------------\n");
     let alias = get_field("Alias");
     clients.remove(&alias);
 }
 
-pub fn show_clients(clients:&mut HashMap<String,Client>){
+pub fn read_clients(clients:&mut HashMap<String,Client>){
     clear();
     println!("-------------------------------\n\
-              |     Clientes Registrados    |\n\
-              -------------------------------\n\
-              |      alias -> nombre        |\n\
-              -------------------------------");
-    for (key, value) in clients.into_iter() {
-        println!("  {:>10} -> {} {}", key, value.name, value.f_lastname);
+              |      Registred Clients      |\n\
+              -------------------------------\n");
+    for (_, value) in clients.into_iter() {
+        let Client{ alias, name, f_lastname, s_lastname, business, itin, phone, email } = value;
+        println!("Alias: {}\n\
+                  Name: {} {} {}\n\
+                  Business: {}\n\
+                  ITIN: {}\n\
+                  Phone: {}\n\
+                  Email: {}\n", 
+                  alias, 
+                  name, 
+                  f_lastname,
+                  s_lastname.as_ref().unwrap_or(&String::from("")),
+                  business,
+                  itin,
+                  phone,
+                  email);
     }
     pause();
 }
