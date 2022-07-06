@@ -1,20 +1,24 @@
-# Ventas
+# Rust-CRUD
 ![](https://img.shields.io/badge/rust-E33616?style=for-the-badge&logo=rust&logoColor=white&labelColor=101010)
 
-Un CRUD hecho en Rust, el cual almacena los clientes en una tabla de
-hash. Es una aplicaci&oacute;n de consola.
+A RUST terminal application which manages clients using a hash table.
 
-## ¿C&oacute;mo ejecutar el programa?
-El comando m&aacute;s indicado es "cargo run", ya que con el programa se
-va a compilar y ejecutar.
-![cap0](https://i.imgur.com/iWlXCBK.png "Comando")
+## How to run the app?
+To build and run the program, execute:
+```bash
+cargo run
+```
 
 ## Screenshots
 
-Al ejecutar el programa va a pedir una palabra de seguridad y est&aacute; es
-password.
-![cap1](https://imgur.com/PRUya83.png "Palabra de seguridad")
+The program asks for a password which is "password".
 
-Este es el men&uacute; e introduciendo el respectivo n&uacute;mero se
-ejecutar&aacute; la acci&oacute;n.
-![cap2](https://imgur.com/shQoqnW.png "Men&uacute;")
+![Password](https://i.imgur.com/4h5Ymhe.png "Password")
+
+In order to choose a option, enter its number.
+
+![Menu](https://i.imgur.com/wtABqVa.png "Menu")
+
+## LICENSE
+
+[MIT](LICENSE)
